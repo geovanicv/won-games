@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import media from 'styled-media-query'
 
 import { LogoProps } from '.'
 
@@ -14,17 +15,19 @@ const wrapperModifiers = {
   `,
 
   hideText: () => css`
-    width: 5.8rem;
-    height: 4.5rem;
-
-    svg {
+    ${media.lessThan('medium')`
+      width: 5.8rem;
       height: 4.5rem;
-      pointer-events: none;
-    }
 
-    .text {
-      display: none;
-    }
+      svg {
+        height: 4.5rem;
+        pointer-events: none;
+      }
+
+      .text {
+        display: none;
+      }
+    `}
   `
 }
 
@@ -34,6 +37,6 @@ export const Wrapper = styled.div<LogoProps>`
 
     ${!!size && wrapperModifiers[size]}
 
-    ${hideText && wrapperModifiers.hideText}
+    ${!!hideText && wrapperModifiers.hideText}
   `}
 `
